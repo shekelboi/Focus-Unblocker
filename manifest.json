@@ -2,8 +2,16 @@
     "name": "Focus Unblocker",
     "version": "0.1.0",
     "description": "Block different websites and boost productivity by only unblocking those once a good reason has been provided.",
-    "permissions": ["webRequest"],
-    "host_permissions": ["<all_urls>"],
+    "permissions": [
+        "declarativeNetRequest",
+        "storage"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "background": {
+        "service_worker": "service_worker.js"
+    },
     "icons": {
         "16": "assets/logo.png",
         "32": "assets/logo.png",
@@ -15,5 +23,6 @@
         "default_title": "Focus Unblocker",
         "default_popup": "popup.html"
     },
+    "options_page": "options.html",
     "manifest_version": 3
 }
