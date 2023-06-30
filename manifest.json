@@ -4,7 +4,8 @@
     "description": "Block different websites and boost productivity by only unblocking those once a good reason has been provided.",
     "permissions": [
         "declarativeNetRequest",
-        "storage"
+        "storage",
+        "webNavigation"
     ],
     "host_permissions": [
         "<all_urls>"
