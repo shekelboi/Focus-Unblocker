@@ -7,7 +7,6 @@ chrome.webNavigation.onBeforeNavigate.addListener((details) => {
     let url = new URL(details.url);
     console.log(url.hostname);
     if (details.frameId == 0 && blocked_websites.find(website => website.hostname == url.hostname)) {
-    if (blocked_websites.find(website => website.hostname == url.hostname)) {
         console.log("This URL is blocked.");
         chrome.tabs.update({url: block_redirect_url.href});
     }
