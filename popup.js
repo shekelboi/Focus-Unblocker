@@ -2,7 +2,7 @@ import {blocked_websites} from './service_worker.js'
 
 console.log(blocked_websites);
 
-
+// Listing the blocked websites
 var blocked_websites_list = document.getElementById("blocked_websites_list");
 blocked_websites.forEach((website) => {
     let list_item = document.createElement('li');

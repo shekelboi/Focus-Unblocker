@@ -1,4 +1,5 @@
 var block_redirect_url = 'reasons/unblock.html';
+// For demonstration purposes only
 export var blocked_websites = [new URL("https://www.youtube.com/watch?v=g6rFff2MAxM"), new URL("https://www.duolingo.com/")];
 
 // We can compare if the URL's host is equal to the host of one of the block websites
