@@ -11,7 +11,8 @@
         "<all_urls>"
     ],
     "background": {
-        "service_worker": "service_worker.js"
+        "service_worker": "service_worker.js",
+        "type": "module"
     },
     "icons": {
         "16": "assets/logo.png",
@@ -24,6 +25,12 @@
         "default_title": "Focus Unblocker",
         "default_popup": "popup.html"
     },
+    "content_scripts": [
+        {
+          "matches": ["<all_urls>"],
+          "js": ["content_script.js"]
+        }
+      ],
     "options_page": "options.html",
     "manifest_version": 3
 }
