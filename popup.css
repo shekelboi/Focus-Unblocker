@@ -1,6 +1,7 @@
 html {
     width: 200px;
     font-size: x-large;
+    user-select: none;
 }
 
 .clickable {

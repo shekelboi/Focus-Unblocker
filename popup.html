@@ -10,13 +10,15 @@
 </head>
 
 <body>
-    <p>Default Popup</p>
-    <div>
+    <h1>Default Popup</h1>
+    <div id="main_container">
         <a href="options.html" target="_blank">
             <p><b>Configure <img src="assets/gear.svg" width="12px" alt="Gear icon"></b></p>
         </a>
-        <p><span id="add_site_to_blocked" class="clickable">➕</span> Add this page to the blocked websites</p>
-        <p><span id="remove_site_from_blocked" class="clickable">➖</span> Remove this page to the blocked websites</p>
+        <p id="add_site_to_blocked_section"><span id="add_site_to_blocked_button" class="clickable">➕</span> Add this page to the blocked websites</p>
+        <p id="remove_site_from_blocked_section"><span id="remove_site_from_blocked_button" class="clickable">➖</span> Remove this page to the blocked websites</p>
+        <h2>List of blocked sites</h2>
+        <ul id="blocked_websites_list"></ul>
     </div>
 </body>
 
