@@ -1,10 +1,10 @@
-import {blocked_websites} from './service_worker.js'
+import * as sw from './service_worker.js'
 
-console.log(blocked_websites);
+console.log(sw.blocked_websites);
 
 // Listing the blocked websites
 var blocked_websites_list = document.getElementById("blocked_websites_list");
-blocked_websites.forEach((website) => {
+sw.blocked_websites.forEach((website) => {
     let list_item = document.createElement('li');
     let url = website.host;
     let split = url.split('.');
@@ -42,15 +42,29 @@ document.getElementById("add_site_to_blocked_button").addEventListener("click", 
 document.getElementById("remove_site_from_blocked_button").addEventListener("click", remove_site_from_blocked);
 
 function add_site_to_blocked() {
-    console.log('Add site to blocked');
     show_remove_from_blocked_button_only();
+    
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        let current_tab = tabs[0];
+        if (current_tab.url != null) {
+            sw.add_website_to_blocked(new URL(current_tab.url));
+        }
+    });
 }
 
 function remove_site_from_blocked() {
     console.log('Remove site from blocked');
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        let current_tab = tabs[0];
+        // If it's undefined, it likely means that the user is on the unblock.html page.
+        // Maybe the unblock.js should be queried to confirm this and to see which website it was redirected from.
+        console.log(current_tab.url);
+        if (current_tab.url != null) {
+            sw.remove_website_from_blocked(new URL(current_tab.url));
+        }
+    });
+    
     show_add_to_blocked_button_only();
 }
 
-chrome.tabs.getCurrent((tab) => {
-    console.log(tab);
-});
+// TODO: refresh listing once a new website is added to the blocklist.
