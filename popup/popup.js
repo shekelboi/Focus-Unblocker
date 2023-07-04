@@ -1,4 +1,4 @@
-import * as sw from './service_worker.js'
+import * as sw from '../service_worker.js'
 
 console.log(sw.blocked_websites);
 

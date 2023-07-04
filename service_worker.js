@@ -1,5 +1,5 @@
 console.log('Service worker started!');
-var block_redirect_url = 'reasons/unblock.html';
+var block_redirect_url = 'sites/reasons/unblock.html';
 // For demonstration purposes only
 // Impractical and unviable since the service worker may be terminated at any time
 export var blocked_websites = [new URL("https://www.youtube.com/watch?v=g6rFff2MAxM"), new URL("https://www.duolingo.com/")];
