@@ -8,10 +8,18 @@
 <body>
     <div class="wrapper">
         <div class="input-data">
-            <input type="text" required>
+            <input id="reasons", type="text" required>
             <div class="underline"></div>
-            <label>Write your reason for unblocking the website!</label>
+            <label>Write your reason!</label>
     </div>
-    <button type="submit">Submit</button>
+    <button onclick="storeReason()", type="unblock">Unblock</button>
+    </div>
+    <script>
+        function storeReason() {
+            var input = document.getElementById("reasons").value;
+            localStorage.setItem("reason", input);
+            alert("Reason stored successfully!");
+        }
+    </script>
 </body>
 </html>
