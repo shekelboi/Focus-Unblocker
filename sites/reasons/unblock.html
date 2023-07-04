@@ -6,19 +6,28 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div class="background-text">The website is blocked for a reason, honey</div>
     <div class="wrapper">
         <div class="input-data">
             <input id="reasons", type="text" required>
             <div class="underline"></div>
             <label>Write your reason!</label>
+            <div id="validationMessage"></div>
     </div>
     <button onclick="storeReason()", type="unblock">Unblock</button>
     </div>
     <script>
         function storeReason() {
             var input = document.getElementById("reasons").value;
+            var validationMessage = document.getElementById("validationMessage");
+
+            if (input.trim() === "") {
+                validationMessage.textContent = "This field is required.";
+                return;
+            }
+
             localStorage.setItem("reason", input);
-            alert("Reason stored successfully!");
+            validationMessage.textContent = "Reason stored successfully!";
         }
     </script>
 </body>
