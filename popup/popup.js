@@ -2,20 +2,31 @@ import * as sw from '../service_worker.js'
 
 // Listing the blocked websites
 var blocked_websites_list = document.getElementById("blocked_websites_list");
+initialize();
 
-chrome.storage.local.get('blocked_websites', (items) => {
-    items.blocked_websites.forEach((href) => {
-        let website = new URL(href);
-        let list_item = document.createElement('li');
-        let url = website.host;
-        let split = url.split('.');
-        if (split.length == 3) {
-            url = split[1];
+function initialize() {
+    check_if_site_is_blocked();
+    list_blocked_websites();
+}
+
+function list_blocked_websites() {
+    chrome.storage.local.get('blocked_websites', (items) => {
+        while (blocked_websites_list.firstChild) {
+            blocked_websites_list.removeChild(blocked_websites_list.firstChild);
         }
-        list_item.appendChild(document.createTextNode(url));
-        blocked_websites_list.appendChild(list_item);
+        items.blocked_websites.forEach((href) => {
+            let website = new URL(href);
+            let list_item = document.createElement('li');
+            let url = website.host;
+            let split = url.split('.');
+            if (split.length == 3) {
+                url = split[1];
+            }
+            list_item.appendChild(document.createTextNode(url));
+            blocked_websites_list.appendChild(list_item);
+        });
     });
-});
+}
 
 var add_to_blocked_section = document.getElementById("add_site_to_blocked_section")
 var remove_from_blocked_section = document.getElementById("remove_site_from_blocked_section")
@@ -29,9 +40,6 @@ function show_remove_from_blocked_button_only() {
     add_to_blocked_section.hidden = true;
     remove_from_blocked_section.hidden = false;
 }
-
-// TODO: This should probably be called from a listener on local storage
-check_if_site_is_blocked();
 
 function check_if_site_is_blocked() {
     chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
@@ -53,7 +61,6 @@ function add_site_to_blocked() {
         let current_tab = tabs[0];
         if (current_tab.url != null) {
             await sw.add_website_to_blocked(new URL(current_tab.url));
-            check_if_site_is_blocked();
         }
     });
 }
@@ -65,9 +72,13 @@ function remove_site_from_blocked() {
         // Maybe the unblock.js should be queried to confirm this and to see which website it was redirected from.
         if (current_tab.url != null) {
             await sw.remove_website_from_blocked(new URL(current_tab.url));
-            check_if_site_is_blocked();
         }
     });
 }
 
-// TODO: refresh listing once a new website is added to the blocklist.
+chrome.storage.onChanged.addListener((changes) => {
+    if (changes.blocked_websites != null) {
+        check_if_site_is_blocked();
+        list_blocked_websites();
+    }
+});
