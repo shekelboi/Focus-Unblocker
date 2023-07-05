@@ -28,7 +28,7 @@ export async function remove_website_from_blocked(url) {
     blocked_websites = blocked_websites.map(href => new URL(href));
     let remove_index = blocked_websites.findIndex(website => website.hostname == url.hostname);
     if (remove_index != -1) {
-        blocked_websites.splice(remove_index);
+        blocked_websites.splice(remove_index, 1);
     }
     blocked_websites = blocked_websites.map(url => url.href);
     await chrome.storage.local.set({ blocked_websites });
