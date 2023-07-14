@@ -10,15 +10,15 @@ body {
     position: relative;
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background: linear-gradient(-135deg, #c850c0, #4158d0);
 }
 
 .background-text {
-    position: absolute;
-    bottom: 500px;
     font-size: 50px;
+    margin-bottom: 30px;
     color: white;
     opacity: 0.4;
     z-index: -1;
@@ -33,21 +33,24 @@ body {
 }
 
 .wrapper .input-data {
-    height: 40px;
+    height: 100px;
     width: 100%;
     position: relative;
 }
 
-.wrapper .input-data input {
+.wrapper .input-data textarea {
     height: 100%;
     width: 100%;
     border: none;
+    resize: none;
+    border-radius: 5px;
+    font-size: 25px;
     border-bottom: 2px solid silver;
 }
 
-.input-data input:focus ~ label,
-.input-data input:valid ~ label {
-    transform: translateY(-20px);
+.input-data textarea:focus ~ label,
+.input-data textarea:valid ~ label {
+    transform: translateY(-90px);
     font-size: 15px;
     color: #4158d0;
 }
@@ -79,8 +82,8 @@ body {
     transition: transform 0.3s ease;
 }
 
-.input-data input:focus ~ .underline:before,
-.input-data input:valid ~ .underline:before {
+.input-data textarea:focus ~ .underline:before,
+.input-data textarea:valid ~ .underline:before {
     transform: scaleX(1);
 }
 
